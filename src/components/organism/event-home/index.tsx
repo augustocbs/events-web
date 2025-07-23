@@ -33,6 +33,10 @@ export function EventHome() {
     router.back();
   };
 
+  const handleGoNewEvent = () => {
+    router.push('/eventos/novo');
+  };
+
   if (loading) {
     return (
       <PageContainer>
@@ -48,7 +52,15 @@ export function EventHome() {
       <EventsHeader title="Eventos" />
       <EventsTable events={events} />
 
-      <div className="mt-4 flex justify-end">
+      <div className="mt-4 flex justify-end gap-4">
+        <Button
+          type="button"
+          variant="primary"
+          onClick={handleGoNewEvent}
+          className="w-1/6"
+        >
+          Novo Evento
+        </Button>
         <Button
           type="button"
           variant="secondary"

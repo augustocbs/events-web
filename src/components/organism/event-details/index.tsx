@@ -112,7 +112,7 @@ export function EventDetails({ eventId }: EventDetailsProps) {
         <EventTitle>{event.name}</EventTitle>
         <EventDescription>{event.description}</EventDescription>
         <EventDate>
-          Data: {new Date(event.date).toLocaleDateString('pt-BR')}
+          Data: {new Date(event.date).toLocaleDateString('pt-BR')} {new Date(event.date).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
         </EventDate>
       </EventHeader>
 

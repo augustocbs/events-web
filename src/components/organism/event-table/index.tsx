@@ -47,7 +47,7 @@ export function EventsTable({ events }: EventsTableProps) {
               </TableCell>
               <TableCell>
                 <CellContent>
-                  {new Date(event.date).toLocaleDateString('pt-BR')}
+                  {new Date(event.date).toLocaleDateString('pt-BR')} {new Date(event.date).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
                 </CellContent>
               </TableCell>
               <TableCell>
