@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { api } from '@/services/api';
-import { EventFormData } from '@/configs/yup';
+import { EventFormData } from '@/configs';
 
 export function useEventCreation() {
   const [loading, setLoading] = useState(false);

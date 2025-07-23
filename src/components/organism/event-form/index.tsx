@@ -1,6 +1,8 @@
+'use client';
+
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { eventSchema, EventFormData } from '@/configs/yup';
+import { eventSchema, EventFormData } from '@/configs';
 import { TextInput, DateInput, Textarea, Button } from '@/components';
 
 interface EventFormProps {
@@ -16,7 +18,6 @@ export function EventForm({
   initialData,
   submitButtonText = 'Criar Evento'
 }: EventFormProps) {
-  // Formatação simples para input type="date" (apenas YYYY-MM-DD)
   const formatInitialDate = (date: any) => {
     if (!date) return '';
     
@@ -24,7 +25,7 @@ export function EventForm({
       const dateObj = new Date(date);
       if (isNaN(dateObj.getTime())) return '';
       
-      return dateObj.toISOString().split('T')[0]; // Pega apenas YYYY-MM-DD
+      return dateObj.toISOString().split('T')[0];
     } catch {
       return '';
     }

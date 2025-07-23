@@ -34,6 +34,12 @@ export const StyledInput = styled.input`
   &::placeholder {
     color: #9ca3af;
   }
+  
+  &:disabled {
+    background-color: #f9fafb;
+    color: #6b7280;
+    cursor: not-allowed;
+  }
 `;
 
 export const ErrorMessage = styled.p`
