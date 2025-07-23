@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
+
 import { api } from '@/services/api';
 import { EventFormData } from '@/configs';
 
@@ -18,13 +20,15 @@ export function useEventCreation() {
         date: new Date(data.date).toISOString(),
       });
       
+      toast.success('Evento criado com sucesso!');
+      
       router.push('/eventos');
     } catch (err) {
       const errorMessage = 'Erro ao criar evento. Tente novamente.';
       setError(errorMessage);
       console.error('Erro ao criar evento:', err);
       
-      alert(errorMessage);
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }

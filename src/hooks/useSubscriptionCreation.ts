@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
+
 import { api } from '@/services/api';
 import { SubscriptionFormData } from '@/configs';
 
-export function useSubscription() {
+export function useSubscriptionCreation() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -11,13 +13,15 @@ export function useSubscription() {
     try {
       setLoading(true);
       
-      const participant = await api.createParticipant(data);
+      await api.createParticipant(data);
       
-      await api.subscribeToEvent(1, participant.id);
+      toast.success('Inscrição realizada com sucesso!');
       
-      router.push('/eventos/1');
+      router.push('/');
     } catch (error) {
       console.error('Erro ao criar inscrição:', error);
+      
+      toast.error('Erro ao realizar inscrição. Tente novamente.');
     } finally {
       setLoading(false);
     }

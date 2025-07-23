@@ -3,12 +3,12 @@
 import { useRouter } from 'next/navigation';
 
 import { Button, PageHeader, SubscriptionForm } from '@/components';
-import { useSubscription } from '@/hooks/useSubscription';
+import { useSubscriptionCreation } from '@/hooks/useSubscriptionCreation';
 
 export default function SubscriptionPage() {
   const router = useRouter();
 
-  const { createSubscription, loading } = useSubscription();
+  const { createSubscription, loading } = useSubscriptionCreation();
 
   const handleGoBack = () => {
     router.back();

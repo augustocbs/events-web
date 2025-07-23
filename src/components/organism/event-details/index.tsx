@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 import { api, Event, Participant } from '@/services/api';
 import { SubscriptionFormData } from '@/configs';
@@ -49,15 +50,14 @@ export function EventDetails({ eventId }: EventDetailsProps) {
       setParticipants(participantsData);
     } catch (error) {
       console.error('Erro ao carregar dados do evento:', error);
+      
+      toast.error('Erro ao carregar dados do evento.');
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    loadEventData();
-  }, [eventId]);
-
+  
   const handleAddParticipant = async (data: SubscriptionFormData) => {
     try {
       setAddingParticipant(true);
@@ -69,8 +69,12 @@ export function EventDetails({ eventId }: EventDetailsProps) {
       const updatedParticipants = await api.getEventParticipants(parseInt(eventId));
       setParticipants(updatedParticipants);
 
+      toast.success('Participante adicionado com sucesso!');
+
     } catch (error) {
       console.error('Erro ao adicionar participante:', error);
+      
+      toast.error('Erro ao adicionar participante. Tente novamente.');
     } finally {
       setAddingParticipant(false);
     }
@@ -79,6 +83,10 @@ export function EventDetails({ eventId }: EventDetailsProps) {
   const handleGoBack = () => {
     router.back();
   };
+
+  useEffect(() => {
+    loadEventData();
+  }, [eventId]);
 
   if (loading) {
     return (
