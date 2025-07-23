@@ -1,11 +1,16 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+
 import { api, Event } from '@/services/api';
-import { EventsTable, EventsHeader } from '@/components';
+import { EventsTable, EventsHeader, Button } from '@/components';
+
 import { PageContainer, LoadingContainer, LoadingText } from './styles';
 
 export function EventHome() {
+  const router = useRouter();
+
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -24,6 +29,10 @@ export function EventHome() {
     loadEvents();
   }, []);
 
+  const handleGoBack = () => {
+    router.back();
+  };
+
   if (loading) {
     return (
       <PageContainer>
@@ -38,6 +47,17 @@ export function EventHome() {
     <PageContainer>
       <EventsHeader title="Eventos" />
       <EventsTable events={events} />
+
+      <div className="mt-4 flex justify-end">
+        <Button
+          type="button"
+          variant="secondary"
+          onClick={handleGoBack}
+          className="w-1/6"
+        >
+          Voltar
+        </Button>
+      </div>
     </PageContainer>
   );
 }

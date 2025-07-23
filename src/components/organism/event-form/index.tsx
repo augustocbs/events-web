@@ -3,7 +3,7 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { eventSchema, EventFormData } from '@/configs';
-import { TextInput, DateInput, Textarea, Button } from '@/components';
+import { TextInput, Button, DateInput } from '@/components';
 
 interface EventFormProps {
   onSubmit: (data: EventFormData) => Promise<void>;
@@ -18,19 +18,6 @@ export function EventForm({
   initialData,
   submitButtonText = 'Criar Evento'
 }: EventFormProps) {
-  const formatInitialDate = (date: any) => {
-    if (!date) return '';
-    
-    try {
-      const dateObj = new Date(date);
-      if (isNaN(dateObj.getTime())) return '';
-      
-      return dateObj.toISOString().split('T')[0];
-    } catch {
-      return '';
-    }
-  };
-
   const { 
     register, 
     handleSubmit, 
@@ -39,7 +26,6 @@ export function EventForm({
     resolver: yupResolver(eventSchema),
     defaultValues: {
       ...initialData,
-      date: initialData?.date ? formatInitialDate(initialData.date) : '',
     },
   });
 
@@ -48,13 +34,13 @@ export function EventForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 max-w-md">
       <TextInput
-        label="Nome"
+        label="Nome do Evento"
         id="name"
         error={errors.name?.message}
         {...register('name')}
       />
 
-      <Textarea
+      <TextInput
         label="Descrição"
         id="description"
         error={errors.description?.message}
@@ -62,7 +48,7 @@ export function EventForm({
       />
 
       <DateInput
-        label="Data"
+        label="Data e Hora do Evento"
         id="date"
         error={errors.date?.message}
         {...register('date')}
