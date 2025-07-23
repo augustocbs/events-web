@@ -19,13 +19,6 @@ export default function Home() {
             >
               Ver Eventos
             </Link>
-            
-            <Link 
-              href="/inscricao" 
-              className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg text-lg font-medium transition-colors duration-200 min-w-[200px]"
-            >
-              Fazer Inscrição
-            </Link>
           </div>
         </div>
       </main>

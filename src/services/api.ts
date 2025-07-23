@@ -5,6 +5,7 @@ export interface Event {
   name: string;
   description: string;
   date: string;
+  message?: string;
 }
 
 export interface Participant {

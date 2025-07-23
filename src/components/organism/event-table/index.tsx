@@ -17,7 +17,7 @@ interface EventsTableProps {
 }
 
 export function EventsTable({ events }: EventsTableProps) {
-  if (events.length === 0) {
+  if (events.length === 0 || events?.message) {
     return (
       <EmptyState>
         Nenhum evento encontrado
@@ -37,7 +37,7 @@ export function EventsTable({ events }: EventsTableProps) {
           </tr>
         </TableHead>
         <TableBody>
-          {events.map((event) => (
+          {events?.map((event) => (
             <tr key={event.id}>
               <TableCell>
                 <CellContent>{event.name}</CellContent>
